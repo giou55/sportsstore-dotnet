@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 namespace SportsStore.Models
 {
     public class StoreDbContext : DbContext
