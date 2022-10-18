@@ -16,3 +16,5 @@ Console.WriteLine(jsonString);
 ------------------------------------------------------------
 https://www.tutorialsteacher.com/articles?category=csharp
 -----------------------------------------------------------
+https://github.com/apress/pro-asp.net-core-6
+----------------------------------------------------------
