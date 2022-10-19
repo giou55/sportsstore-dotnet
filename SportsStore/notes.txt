@@ -20,3 +20,12 @@ https://github.com/apress/pro-asp.net-core-6
 ----------------------------------------------------------
 σελίδα 221 στην πάνω μπάρα
 σελίδα 191 στην άκρη της σελίδας
+---------------------------------------------------------
+Για μελέτη:
+
+public static T? GetJson<T>(this ISession session, string key) {
+     var sessionData = session.GetString(key);
+     return sessionData == null
+           ? default(T) : JsonSerializer.Deserialize<T>(sessionData);
+}
+------------------------------------------------------------
