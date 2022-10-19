@@ -10,7 +10,6 @@ var weatherForecast = new WeatherForecast
 };
 
 string jsonString = JsonSerializer.Serialize(weatherForecast);
-
 Console.WriteLine(jsonString);
 
 ------------------------------------------------------------

@@ -23,6 +23,7 @@ namespace SportsStore.Pages
         {
             Product? product = repository.Products
             .FirstOrDefault(p => p.ProductID == productId);
+
             if (product != null)
             {
                 Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
