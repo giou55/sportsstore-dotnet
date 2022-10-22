@@ -32,12 +32,12 @@ namespace SportsStore.Controllers
             if (ModelState.IsValid)
             {
                 IdentityUser user =
-                await userManager.FindByNameAsync(loginModel.Name);
+                    await userManager.FindByNameAsync(loginModel.Name);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
                     if ((await signInManager.PasswordSignInAsync(user,
-                    loginModel.Password, false, false)).Succeeded)
+                        loginModel.Password, false, false)).Succeeded)
                     {
                         return Redirect(loginModel?.ReturnUrl ?? "/Admin");
                     }
