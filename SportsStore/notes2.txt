@@ -1,6 +1,0 @@
-﻿Razor Pages allow HTML content, Razor expressions, and code to be combined in a single file, 
-but if you want to unit test a Razor Page, then you need to use a separate class file.
-
-The class associated with a Razor Page is known as its page model class, and it defines handler methods
-that are invoked for different types of HTTP requests, which update state before rendering the view.
-
