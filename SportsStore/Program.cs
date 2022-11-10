@@ -6,10 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<StoreDbContext>(opts => {
-    opts.UseSqlServer(
-    builder.Configuration["ConnectionStrings:SportsStoreConnection"]);
-});
+
+/*builder.Services.AddDbContext<StoreDbContext>(
+    options => options.UseSqlServer(
+        builder.Configuration["ConnectionStrings:SportsStoreConnectionLocal"])
+);*/
+
+builder.Services.AddDbContext<AppIdentityDbContext>(
+    options => options.UseSqlServer(
+        builder.Configuration["ConnectionStrings:IdentityConnectionLocal"])
+);
 
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
@@ -21,9 +27,26 @@ builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration["ConnectionStrings:IdentityConnection"]));
+var storeConnectionString = "server=linuxzone34.grserver.gr;port=3306;user=giourmet449939;password=85!Lh65FdqW;database=sportsstore_dotnet";
+var identityConnectionString = "server=linuxzone34.grserver.gr;port=3306;user=giourmet449939;password=85!Lh65FdqW;database=sportsstore_dotnet";
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
+
+builder.Services.AddDbContext<StoreDbContext>(
+    dbContextOptions => dbContextOptions.UseMySql(
+        storeConnectionString,
+        ServerVersion.AutoDetect(storeConnectionString),
+        options => options.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: System.TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null)
+        )
+);
+
+/*builder.Services.AddDbContext<IdentityDbContext>(
+    dbContextOptions => dbContextOptions.UseMySql(
+        identityConnectionString, serverVersion)
+);
+*/
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppIdentityDbContext>();

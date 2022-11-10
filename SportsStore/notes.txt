@@ -28,3 +28,9 @@ public static T? GetJson<T>(this ISession session, string key) {
            ? default(T) : JsonSerializer.Deserialize<T>(sessionData);
 }
 ------------------------------------------------------------
+Administration
+http://localhost:5000/admin
+Username: Admin
+Password: Secret123$
+(Δηλώνονται μέσα στο αρχείο IdentitySeedData.cs)
+-----------------------------------------------------------
