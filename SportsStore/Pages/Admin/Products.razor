@@ -1,5 +1,6 @@
 ﻿@page "/admin/products"
 @page "/admin"
+@using System.Globalization
 @inherits OwningComponentBase<IStoreRepository>
 
 <table class="table table-sm table-striped table-bordered">
@@ -21,7 +22,7 @@
                     <td>@p.ProductID</td>
                     <td>@p.Name</td>
                     <td>@p.Category</td>
-                    <td>@p.Price.ToString("c")</td>
+                    <td>@p.Price.ToString("c", new CultureInfo("fr-FR"))</td>
                     <td>
                         <NavLink class="btn btn-info btn-sm"
                             href="@GetDetailsUrl(p.ProductID ?? 0)">

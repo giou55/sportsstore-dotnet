@@ -1,4 +1,5 @@
 ﻿@page "/admin/products/details/{id:long}"
+@using System.Globalization
 
 <h3 class="bg-info text-white text-center p-1">Details</h3>
 
@@ -8,7 +9,7 @@
         <tr><th>Name</th><td>@Product?.Name</td></tr>
         <tr><th>Description</th><td>@Product?.Description</td></tr>
         <tr><th>Category</th><td>@Product?.Category</td></tr>
-        <tr><th>Price</th><td>@Product?.Price.ToString("C")</td></tr>
+        <tr><th>Price</th><td>@Product?.Price.ToString("c", new CultureInfo("fr-FR"))</td></tr>
     </tbody>
 </table>
 

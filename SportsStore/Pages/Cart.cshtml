@@ -1,5 +1,6 @@
 ﻿@page
 @model CartModel
+@using System.Globalization
 
 <h2>Your cart</h2>
 <table class="table table-bordered table-striped">
@@ -18,9 +19,9 @@
             <tr>
                 <td class="text-center">@line.Quantity</td>
                 <td class="text-left">@line.Product.Name</td>
-                <td class="text-right">@line.Product.Price.ToString("c")</td>
+                <td class="text-right">@line.Product.Price.ToString("c", new CultureInfo("fr-FR"))</td>
                 <td class="text-right">
-                    @((line.Quantity * line.Product.Price).ToString("c"))
+                    @((line.Quantity * line.Product.Price).ToString("c", new CultureInfo("fr-FR")))
                 </td>
                 <td class="text-center">
                     <form asp-page-handler="Remove" method="post">
@@ -40,7 +41,7 @@
         <tr>
             <td colspan="3" class="text-right">Total:</td>
             <td class="text-right">
-                @Model?.Cart?.ComputeTotalValue().ToString("c")
+                @Model?.Cart?.ComputeTotalValue().ToString("c", new CultureInfo("fr-FR"))
             </td>
         </tr>
     </tfoot>

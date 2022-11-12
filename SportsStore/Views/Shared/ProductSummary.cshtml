@@ -1,4 +1,5 @@
-﻿@model Product
+﻿@using System.Globalization
+@model Product
 
 <div class="card card-outline-primary m-1 p-1">
     <div class="bg-faded p-1">
@@ -6,7 +7,7 @@
             @Model?.Name
             <span class="badge rounded-pill bg-primary text-white"
                   style="float:right">
-                <small>@Model?.Price.ToString("c")</small>
+                <small>@Model?.Price.ToString("c", new CultureInfo("fr-FR"))</small>
             </span>
         </h4>
     </div>

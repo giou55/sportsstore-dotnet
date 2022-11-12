@@ -1,4 +1,5 @@
 ﻿@model Cart
+@using System.Globalization
 
 <div class="">
     @if (Model?.Lines.Count() > 0)
@@ -6,7 +7,7 @@
         <small class="navbar-text">
             <b>Your cart:</b>
             @Model?.Lines.Sum(x => x.Quantity) item(s)
-            @Model?.ComputeTotalValue().ToString("c")
+            @Model?.ComputeTotalValue().ToString("c", new CultureInfo("fr-FR"))
         </small>
     } else {
         <small class="navbar-text">
