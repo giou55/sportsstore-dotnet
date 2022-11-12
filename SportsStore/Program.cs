@@ -12,10 +12,10 @@ builder.Services.AddControllersWithViews();
         builder.Configuration["ConnectionStrings:SportsStoreConnectionLocal"])
 );*/
 
-builder.Services.AddDbContext<AppIdentityDbContext>(
+/*builder.Services.AddDbContext<AppIdentityDbContext>(
     options => options.UseSqlServer(
         builder.Configuration["ConnectionStrings:IdentityConnectionLocal"])
-);
+);*/
 
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
@@ -28,13 +28,24 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddServerSideBlazor();
 
 var storeConnectionString = "server=linuxzone34.grserver.gr;port=3306;user=giourmet449939;password=85!Lh65FdqW;database=sportsstore_dotnet";
-var identityConnectionString = "server=linuxzone34.grserver.gr;port=3306;user=giourmet449939;password=85!Lh65FdqW;database=sportsstore_dotnet";
+var identityConnectionString = "server=linuxzone34.grserver.gr;port=3306;user=giourmet8888;password=85!Lh65FdqW;database=identity_dotnet";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
 builder.Services.AddDbContext<StoreDbContext>(
     dbContextOptions => dbContextOptions.UseMySql(
         storeConnectionString,
         ServerVersion.AutoDetect(storeConnectionString),
+        options => options.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: System.TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null)
+        )
+);
+
+builder.Services.AddDbContext<AppIdentityDbContext>(
+    dbContextOptions => dbContextOptions.UseMySql(
+        identityConnectionString,
+        ServerVersion.AutoDetect(identityConnectionString),
         options => options.EnableRetryOnFailure(
             maxRetryCount: 5,
             maxRetryDelay: System.TimeSpan.FromSeconds(30),
